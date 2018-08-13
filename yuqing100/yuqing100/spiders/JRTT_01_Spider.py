@@ -141,7 +141,9 @@ class Jrtt01SpiderSpider(scrapy.Spider):
             # 文章发表时间
             PublishTime = sele.xpath(
                 '/html/body/div/div[2]/div[2]/div[1]/div[1]/span[2]/text()').extract_first()
-
+            if '2018' not in PublishTime:
+                PublishTime = sele.xpath(
+                    '/html/body/div/div[2]/div[2]/div[1]/div[1]/span[3]/text()').extract_first()
             # Crawler
             # 文章爬取时间
             Crawler = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
