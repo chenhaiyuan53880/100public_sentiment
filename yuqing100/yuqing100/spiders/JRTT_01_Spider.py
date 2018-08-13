@@ -101,9 +101,11 @@ class Jrtt01SpiderSpider(scrapy.Spider):
         panduan = Panduan_JRTT()
         db_url = panduan.panduan()
         for link in links:
-            link = 'https://www.toutiao.com' + link
-            if link not in db_url:
-                urls.add(link)
+            link_ = 'https://www.toutiao.com' + link
+            if link_ not in db_url:
+                urls.add(link_)
+            else:
+                print(link_,'--重复')
         for url in urls:
             yield SplashRequest(url=url,
                                 callback=self.parse1,
@@ -210,8 +212,6 @@ class Jrtt01SpiderSpider(scrapy.Spider):
             comments_sele = sele.xpath('//*[@id="comment"]')
             comments_sele_list = comments_sele.xpath(
                 '//li[contains(@class, "c-item")]')
-            print(len(comments_sele_list),
-                  '          111111111111111             ')
             for i in range(len(comments_sele_list)):
                 comments = {}
                 # commentPublishTime

@@ -153,7 +153,7 @@ class Panduan_JRTT(object):
     def panduan(self):
         Session = sessionmaker(bind=engine)
         session = Session()
-        url_list = session.query(Repository_heimawang.URL).all()
+        url_list = session.query(Repository_JRTT.URL).all()
         db_urls = []
         for db_url in url_list:
             db_url_ = db_url[0]
@@ -164,5 +164,6 @@ class Panduan_JRTT(object):
 
 
 if __name__ == '__main__':
-    panduan = Panduan_banyuetan()
-    panduan.panduan()
+    panduan = Panduan_JRTT()
+    if 'https://www.toutiao.com/group/65883611957475415121/' in panduan.panduan():
+        print('Ture')
