@@ -167,6 +167,31 @@ class Repository_kepuchina(Base):
     img_url = Column(String(255))
     img_path = Column(String(255))
 
+class Repository_Cankaoxiaoxi(Base):
+    __tablename__ = 'last9991'
+    id = Column(Integer, primary_key=True)
+    AuthorID = Column(String(255))
+    AuthorName = Column(String(255))
+    ArticleTitle = Column(String(255))
+    SourceArticleURL = Column(String(255))
+    URL = Column(String(255))
+    PublishTime = Column(String(255))
+    Crawler = Column(String(255))
+    ReadCount = Column(String(255))
+    CommentCount = Column(String(255))
+    TransmitCount = Column(String(255))
+    Content = Column(Text())
+    comments = Column(Text())
+    AgreeCount = Column(String(255))
+    DisagreeCount = Column(String(255))
+    AskCount = Column(String(255))
+    ParticipateCount = Column(String(255))
+    CollectionCount = Column(String(255))
+    Classification = Column(String(255))
+    Labels = Column(String(255))
+    Type = Column(String(255))
+    RewardCount = Column(String(255))
+
 if __name__ == '__main__':
     Base.metadata.create_all(engine)
 

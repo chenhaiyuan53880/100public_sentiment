@@ -32,7 +32,7 @@ CONCURRENT_REQUESTS = 6
 #     'use_unicode': False,
 # }
 
-SPLASH_URL = 'http://192.168.99.100:8050'
+SPLASH_URL = 'http://192.168.10.183:8050'
 
 DOWNLOADER_MIDDLEWARES = {
     # 'Job.middlewares.phantomjsMiddleware.phantomjsMiddleware': 543,

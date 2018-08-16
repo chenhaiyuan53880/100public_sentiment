@@ -4,7 +4,6 @@ from scrapy import cmdline
 # cmdline.execute("scrapy crawl lianhezaobao_spider".split())
 # cmdline.execute("scrapy crawl nanfrwzk_spider".split())
 # cmdline.execute("scrapy crawl sansijiaoyu_spider".split())
-# cmdline.execute("scrapy crawl JRTT_01_Spider".split())
 cmdline.execute("scrapy crawl Cankaoxiaoxi_Spider".split())
 
 

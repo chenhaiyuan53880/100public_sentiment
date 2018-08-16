@@ -46,10 +46,11 @@ class SansijiaoyuSpider(scrapy.Spider):
         panduan = Panduan_sansijiaoyu()
         db_url = panduan.panduan()
         for link in links:
+            link = 'http://www.srssn.com' + link
             if link not in db_url:
                 urls.add(link)
         for url in urls:
-            url = 'http://www.srssn.com' + url
+
             yield SplashRequest(url=url,
                                 callback=self.parse1,
                                 # meta={'url':link},
