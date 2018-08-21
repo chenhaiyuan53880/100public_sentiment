@@ -9,8 +9,8 @@
 import os
 import requests
 from sqlalchemy.orm import sessionmaker
-from yuqing100.models import Repository_Danjianyanjiu,Repository_Huxiuwang,Repository_Cankaoxiaoxi,Repository_JRTT,Repository_kepuchina,Repository_banyuetan,Repository_heimawang, Repository_sansijiaoyu, Repository_nanfrwzk, Repository_lianhezaobao, engine
-from yuqing100.items import Yuqing_DanjianyanjiuItem,Yuqing_HuxiuwangItem,Yuqing_CankaoxiaoxiItem,Yuqing_JRTTItem,Yuqing_banyuetanItem,Yuqing_heimawangItem, Yuqing_sansijiaoyuItem, Yuqing_nanfrwzkItem, Yuqing_lianhezaobaoItem, Kepu_tupian
+from yuqing100.models import Repository_Zgdzgblt,Repository_Douban,Repository_Danjianyanjiu,Repository_Huxiuwang,Repository_Cankaoxiaoxi,Repository_JRTT,Repository_kepuchina,Repository_banyuetan,Repository_heimawang, Repository_sansijiaoyu, Repository_nanfrwzk, Repository_lianhezaobao, engine
+from yuqing100.items import Yuqing_ZgdzgbltItem,Yuqing_DoubanItem,Yuqing_DanjianyanjiuItem,Yuqing_HuxiuwangItem,Yuqing_CankaoxiaoxiItem,Yuqing_JRTTItem,Yuqing_banyuetanItem,Yuqing_heimawangItem, Yuqing_sansijiaoyuItem, Yuqing_nanfrwzkItem, Yuqing_lianhezaobaoItem, Kepu_tupian
 from yuqing100.settings import IMAGES_STORE
 
 class Yuqing100Pipeline(object):
@@ -41,6 +41,12 @@ class Yuqing100Pipeline(object):
             return item
         elif isinstance(item, Yuqing_DanjianyanjiuItem):
             self.session.add(Repository_Danjianyanjiu(**item))
+            return item
+        elif isinstance(item, Yuqing_DoubanItem):
+            self.session.add(Repository_Douban(**item))
+            return item
+        elif isinstance(item, Yuqing_ZgdzgbltItem):
+            self.session.add(Repository_Zgdzgblt(**item))
             return item
         elif isinstance(item, Kepu_tupian):
 
@@ -202,6 +208,32 @@ class Panduan_Danjianyanjiu(object):
         Session = sessionmaker(bind=engine)
         session = Session()
         url_list = session.query(Repository_Danjianyanjiu.URL).all()
+        db_urls = []
+        for db_url in url_list:
+            db_url_ = db_url[0]
+            db_urls.append(db_url_)
+        session.commit()
+        session.close()
+        return db_urls
+
+class Panduan_Douban(object):
+    def panduan(self):
+        Session = sessionmaker(bind=engine)
+        session = Session()
+        url_list = session.query(Repository_Douban.URL).all()
+        db_urls = []
+        for db_url in url_list:
+            db_url_ = db_url[0]
+            db_urls.append(db_url_)
+        session.commit()
+        session.close()
+        return db_urls
+
+class Panduan_Zgdzgblt(object):
+    def panduan(self):
+        Session = sessionmaker(bind=engine)
+        session = Session()
+        url_list = session.query(Repository_Douban.URL).all()
         db_urls = []
         for db_url in url_list:
             db_url_ = db_url[0]

@@ -88,6 +88,14 @@ class CankaoxiaoxiSpider(scrapy.Spider):
                 bodys = sele.xpath('//div[@id="ctrlfscont"]//p/text()').extract()
                 for body in bodys:
                     Content = Content + str(body)
+            try:
+                AgreeCount = sele.xpath('//p[@class="emoji-num"]/text()').extract()[3]
+            except:
+                AgreeCount = ''
+            try:
+                DisagreeCount = sele.xpath('//p[@class="emoji-num"]/text()').extract()[0]
+            except:
+                DisagreeCount = ''
             item = Yuqing_CankaoxiaoxiItem({
                 'AuthorID': '',
                 'AuthorName': sele.xpath('//span[@id="editor_baidu"]/text()').extract_first(),
@@ -101,8 +109,8 @@ class CankaoxiaoxiSpider(scrapy.Spider):
                 'TransmitCount': '',
                 'Content': Content,
                 'comments': '',
-                'AgreeCount': sele.xpath('//p[@class="emoji-num"]/text()').extract()[3],
-                'DisagreeCount': sele.xpath('//p[@class="emoji-num"]/text()').extract()[0],
+                'AgreeCount': AgreeCount,
+                'DisagreeCount': DisagreeCount,
                 'AskCount': '',
                 'ParticipateCount': '',
                 'CollectionCount': '',

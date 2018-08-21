@@ -2,12 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b96cec73-5d74-47eb-a248-eb71776e3824" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/yuqing100/yuqing100/spiders/danjianyanjiu_spider.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/yuqing100/yuqing100/spiders/douban_spider.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/yuqing100/yuqing100/spiders/zgdzgblt_spider.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yuqing100/main.py" afterPath="$PROJECT_DIR$/yuqing100/main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yuqing100/yuqing100/items.py" afterPath="$PROJECT_DIR$/yuqing100/yuqing100/items.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yuqing100/yuqing100/models.py" afterPath="$PROJECT_DIR$/yuqing100/yuqing100/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yuqing100/yuqing100/pipelines.py" afterPath="$PROJECT_DIR$/yuqing100/yuqing100/pipelines.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yuqing100/yuqing100/spiders/cankaoxiaoxi_spider.py" afterPath="$PROJECT_DIR$/yuqing100/yuqing100/spiders/cankaoxiaoxi_spider.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,8 +19,8 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/100public_sentiment$models.coverage" NAME="models Coverage Results" MODIFIED="1534488062163" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/yuqing100/yuqing100" />
-    <SUITE FILE_PATH="coverage/100public_sentiment$main.coverage" NAME="main Coverage Results" MODIFIED="1534488730774" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/yuqing100" />
+    <SUITE FILE_PATH="coverage/100public_sentiment$models.coverage" NAME="models Coverage Results" MODIFIED="1534816354817" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/yuqing100/yuqing100" />
+    <SUITE FILE_PATH="coverage/100public_sentiment$main.coverage" NAME="main Coverage Results" MODIFIED="1534816650934" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/yuqing100" />
     <SUITE FILE_PATH="coverage/100public_sentiment$pipelines.coverage" NAME="pipelines Coverage Results" MODIFIED="1534144690001" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/yuqing100/yuqing100" />
     <SUITE FILE_PATH="coverage/100public_sentiment$cankaoxiaoxi_spider.coverage" NAME="cankaoxiaoxi_spider Coverage Results" MODIFIED="1534315779398" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/yuqing100/yuqing100/spiders" />
   </component>
@@ -28,18 +30,28 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/yuqing100/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="8" column="50" lean-forward="false" selection-start-line="8" selection-start-column="50" selection-end-line="8" selection-end-column="50" />
+            <state relative-caret-position="290">
+              <caret line="10" column="45" lean-forward="false" selection-start-line="10" selection-start-column="45" selection-end-line="10" selection-end-column="45" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="danjianyanjiu_spider.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/yuqing100/yuqing100/spiders/danjianyanjiu_spider.py">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/yuqing100/yuqing100/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="406">
-              <caret line="53" column="34" lean-forward="true" selection-start-line="53" selection-start-column="34" selection-end-line="53" selection-end-column="34" />
+            <state relative-caret-position="48">
+              <caret line="271" column="25" lean-forward="false" selection-start-line="271" selection-start-column="6" selection-end-line="271" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="zgdzgblt_spider.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/yuqing100/yuqing100/spiders/zgdzgblt_spider.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="116">
+              <caret line="40" column="24" lean-forward="true" selection-start-line="40" selection-start-column="24" selection-end-line="40" selection-end-column="24" />
               <folding>
                 <element signature="e#24#37#0" expanded="true" />
               </folding>
@@ -47,11 +59,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="heimawang_spider.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/yuqing100/yuqing100/spiders/heimawang_spider.py">
+      <file leaf-file-name="banyuetan_spider.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/yuqing100/yuqing100/spiders/banyuetan_spider.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="522">
-              <caret line="39" column="30" lean-forward="true" selection-start-line="34" selection-start-column="8" selection-end-line="39" selection-end-column="30" />
+            <state relative-caret-position="142">
+              <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="6" selection-end-column="49" />
+              <folding>
+                <element signature="e#742#1902#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cankaoxiaoxi_spider.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/yuqing100/yuqing100/spiders/cankaoxiaoxi_spider.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="232">
+              <caret line="104" column="96" lean-forward="true" selection-start-line="104" selection-start-column="79" selection-end-line="104" selection-end-column="96" />
               <folding>
                 <element signature="e#24#37#0" expanded="true" />
               </folding>
@@ -62,8 +86,8 @@
       <file leaf-file-name="items.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/yuqing100/yuqing100/items.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="219" column="30" lean-forward="false" selection-start-line="219" selection-start-column="6" selection-end-line="219" selection-end-column="30" />
+            <state relative-caret-position="657">
+              <caret line="294" column="25" lean-forward="false" selection-start-line="294" selection-start-column="6" selection-end-line="294" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -72,8 +96,8 @@
       <file leaf-file-name="pipelines.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/yuqing100/yuqing100/pipelines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="199" column="27" lean-forward="false" selection-start-line="199" selection-start-column="6" selection-end-line="199" selection-end-column="27" />
+            <state relative-caret-position="266">
+              <caret line="231" column="22" lean-forward="false" selection-start-line="231" selection-start-column="6" selection-end-line="231" selection-end-column="22" />
               <folding>
                 <element signature="e#194#203#0" expanded="true" />
               </folding>
@@ -109,13 +133,15 @@
         <option value="$PROJECT_DIR$/yuqing100/yuqing100/settings.py" />
         <option value="$PROJECT_DIR$/yuqing100/yuqing100/spiders/lianhezaobao_spider.py" />
         <option value="$PROJECT_DIR$/yuqing100/yuqing100/spiders/sansijiaoyu_spider.py" />
-        <option value="$PROJECT_DIR$/yuqing100/yuqing100/spiders/cankaoxiaoxi_spider.py" />
         <option value="$PROJECT_DIR$/yuqing100/yuqing100/spiders/huxiuwang_spider.py" />
+        <option value="$PROJECT_DIR$/yuqing100/yuqing100/spiders/danjianyanjiu_spider.py" />
+        <option value="$PROJECT_DIR$/yuqing100/yuqing100/spiders/cankaoxiaoxi_spider.py" />
+        <option value="$PROJECT_DIR$/yuqing100/yuqing100/spiders/douban_spider.py" />
         <option value="$PROJECT_DIR$/yuqing100/main.py" />
         <option value="$PROJECT_DIR$/yuqing100/yuqing100/items.py" />
         <option value="$PROJECT_DIR$/yuqing100/yuqing100/models.py" />
         <option value="$PROJECT_DIR$/yuqing100/yuqing100/pipelines.py" />
-        <option value="$PROJECT_DIR$/yuqing100/yuqing100/spiders/danjianyanjiu_spider.py" />
+        <option value="$PROJECT_DIR$/yuqing100/yuqing100/spiders/zgdzgblt_spider.py" />
       </list>
     </option>
   </component>
@@ -493,7 +519,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16311301" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -502,7 +528,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.7483731" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.70607376" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329718" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -613,7 +639,7 @@
         <state relative-caret-position="493">
           <caret line="26" column="48" lean-forward="true" selection-start-line="26" selection-start-column="48" selection-end-line="26" selection-end-column="48" />
           <folding>
-            <element signature="e#24#37#0" expanded="false" />
+            <element signature="e#24#37#0" expanded="true" />
             <element signature="e#421#1243#0" expanded="false" />
           </folding>
         </state>
@@ -670,7 +696,7 @@
         <state relative-caret-position="348">
           <caret line="17" column="5" lean-forward="true" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
           <folding>
-            <element signature="e#24#37#0" expanded="false" />
+            <element signature="e#24#37#0" expanded="true" />
             <element signature="e#421#1243#0" expanded="false" />
           </folding>
         </state>
@@ -761,41 +787,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/yuqing100/yuqing100/spiders/sansijiaoyu_spider.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="50" column="30" lean-forward="true" selection-start-line="50" selection-start-column="30" selection-end-line="50" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/yuqing100/yuqing100/spiders/lianhezaobao_spider.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="614">
           <caret line="99" column="75" lean-forward="true" selection-start-line="99" selection-start-column="38" selection-end-line="99" selection-end-column="75" />
           <folding>
             <element signature="e#315#1675#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yuqing100/yuqing100/spiders/cankaoxiaoxi_spider.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="70" column="16" lean-forward="false" selection-start-line="70" selection-start-column="16" selection-end-line="70" selection-end-column="60" />
-          <folding>
-            <element signature="e#24#37#0" expanded="false" />
-            <element signature="e#421#1243#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yuqing100/yuqing100/spiders/banyuetan_spider.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="454">
-          <caret line="82" column="66" lean-forward="true" selection-start-line="82" selection-start-column="34" selection-end-line="82" selection-end-column="66" />
-          <folding>
-            <element signature="e#742#1902#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -808,34 +805,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/yuqing100/yuqing100/spiders/JRTT_01_Spider.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4824">
-          <caret line="104" column="35" lean-forward="true" selection-start-line="104" selection-start-column="35" selection-end-line="104" selection-end-column="35" />
-          <folding>
-            <element signature="e#24#37#0" expanded="false" />
-            <element signature="e#818#3012#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/yuqing100/yuqing100/spiders/huxiuwang_spider.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="116">
           <caret line="28" column="4" lean-forward="true" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="4" />
           <folding>
-            <element signature="e#24#37#0" expanded="true" />
+            <element signature="e#24#37#0" expanded="false" />
             <element signature="e#263#505#0" expanded="false" />
             <element signature="e#514#738#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yuqing100/yuqing100/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="219" column="30" lean-forward="false" selection-start-line="219" selection-start-column="6" selection-end-line="219" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -847,46 +825,126 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/yuqing100/main.py">
+    <entry file="file://$PROJECT_DIR$/yuqing100/yuqing100/spiders/danjianyanjiu_spider.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="8" column="50" lean-forward="false" selection-start-line="8" selection-start-column="50" selection-end-line="8" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yuqing100/yuqing100/items.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="219" column="30" lean-forward="false" selection-start-line="219" selection-start-column="6" selection-end-line="219" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/yuqing100/yuqing100/pipelines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="199" column="27" lean-forward="false" selection-start-line="199" selection-start-column="6" selection-end-line="199" selection-end-column="27" />
+        <state relative-caret-position="406">
+          <caret line="53" column="34" lean-forward="true" selection-start-line="53" selection-start-column="34" selection-end-line="53" selection-end-column="34" />
           <folding>
-            <element signature="e#194#203#0" expanded="true" />
+            <element signature="e#24#37#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yuqing100/yuqing100/spiders/sansijiaoyu_spider.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="77">
+          <caret line="75" column="0" lean-forward="false" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yuqing100/yuqing100/spiders/kepuchina_tuwen_spider.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="715">
+          <caret line="50" column="20" lean-forward="true" selection-start-line="50" selection-start-column="20" selection-end-line="50" selection-end-column="20" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/yuqing100/yuqing100/spiders/heimawang_spider.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="39" column="30" lean-forward="true" selection-start-line="34" selection-start-column="8" selection-end-line="39" selection-end-column="30" />
+        <state relative-caret-position="174">
+          <caret line="51" column="24" lean-forward="true" selection-start-line="51" selection-start-column="24" selection-end-line="51" selection-end-column="24" />
+          <folding>
+            <element signature="e#24#37#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yuqing100/yuqing100/spiders/JRTT_01_Spider.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="933">
+          <caret line="294" column="22" lean-forward="true" selection-start-line="270" selection-start-column="12" selection-end-line="294" selection-end-column="22" />
+          <folding>
+            <element signature="e#818#3012#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/parsel/selector.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="227" column="0" lean-forward="false" selection-start-line="227" selection-start-column="0" selection-end-line="227" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yuqing100/yuqing100/spiders/douban_spider.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-116">
+          <caret line="5" column="15" lean-forward="true" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yuqing100/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="10" column="45" lean-forward="false" selection-start-line="10" selection-start-column="45" selection-end-line="10" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yuqing100/yuqing100/spiders/cankaoxiaoxi_spider.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="104" column="96" lean-forward="true" selection-start-line="104" selection-start-column="79" selection-end-line="104" selection-end-column="96" />
           <folding>
             <element signature="e#24#37#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/yuqing100/yuqing100/spiders/danjianyanjiu_spider.py">
+    <entry file="file://$PROJECT_DIR$/yuqing100/yuqing100/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="53" column="34" lean-forward="true" selection-start-line="53" selection-start-column="34" selection-end-line="53" selection-end-column="34" />
+        <state relative-caret-position="48">
+          <caret line="271" column="25" lean-forward="false" selection-start-line="271" selection-start-column="6" selection-end-line="271" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yuqing100/yuqing100/spiders/banyuetan_spider.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="6" selection-end-column="49" />
+          <folding>
+            <element signature="e#742#1902#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yuqing100/yuqing100/items.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="657">
+          <caret line="294" column="25" lean-forward="false" selection-start-line="294" selection-start-column="6" selection-end-line="294" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yuqing100/yuqing100/pipelines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="231" column="22" lean-forward="false" selection-start-line="231" selection-start-column="6" selection-end-line="231" selection-end-column="22" />
+          <folding>
+            <element signature="e#194#203#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yuqing100/yuqing100/spiders/zgdzgblt_spider.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="40" column="24" lean-forward="true" selection-start-line="40" selection-start-column="24" selection-end-line="40" selection-end-column="24" />
           <folding>
             <element signature="e#24#37#0" expanded="true" />
           </folding>
