@@ -25,7 +25,7 @@ class HeimawangSpider(scrapy.Spider):
         for url in self.start_urls:
             yield SplashRequest(url=url,
                                 callback=self.parse,
-                                args={'headers': self.headers, 'wait': 10},
+                                # args={'headers': self.headers, 'wait': 10},
                                 encoding='utf-8')
 
     def parse(self, response):

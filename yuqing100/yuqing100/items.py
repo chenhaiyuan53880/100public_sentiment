@@ -294,3 +294,18 @@ class Yuqing_DoubanItem(scrapy.Item):
 
 class Yuqing_ZgdzgbltItem(Yuqing_Item):
     pass
+
+class Yuqing_ZhongguolishiItem(Yuqing_Item):
+    pass
+
+class Yuqing_ZgwhbItem(Yuqing_Item):
+    pass
+
+class Yuqing_ZgwmwItem(Yuqing_Item):
+    pass
+
+class Yuqing_ZakerItem(Yuqing_Item):
+    pass
+
+class Yuqing_QiushiItem(Yuqing_Item):
+    pass

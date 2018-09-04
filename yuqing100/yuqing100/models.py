@@ -2,11 +2,69 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, Text
 import pymysql
+import datetime
+import re
 pymysql.install_as_MySQLdb()
 
 engine = create_engine('mysql://test:test@192.168.10.114:3306/crawler_100?charset=utf8')
 Base = declarative_base()
+def datefilter(date,Crawler):
+    """
+    时间过滤，并转换正确的时间格式(取字符串的最后一项日期值)
+    """
+    try:
+        crawldate = datetime.datetime.strptime(Crawler,'%Y-%m-%d')
+    except:
+        crawldate = datetime.datetime.strptime(Crawler,'%Y-%m-%d %H:%M:%S')
+    if date and crawldate:
+        date = date.replace(".", "-").replace("/", "-").replace("\\", "-").replace(".", "-")
+        re_en = re.compile("(201[1-9]-\d{1,2}-\d{1,2}[\s]+\d{1,2}:\d{1,2}:\d{1,2})")
+        re_cn = re.compile(u"(201[1-9]年\d{1,2}月\d{1,2}日[\s]+\d{1,2}时\d{1,2}分\d{1,2})秒")
+        re_d_en = re.compile("(201[1-9]-(0[1-9]|1[0-2]|[0-9])-(0[1-9]|[1-2][0-9]|3[0-1]|[0-9]))")
+        re_d_cn = re.compile(u"(201[1-9]年\d{1,2}月\d{1,2})日")
+        re_m = re.compile("((0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]))")
+        re_d = re.compile(u"([昨天|前天|今天|刚刚])")
+        re_d_dn = re.compile(u"(\d{1,2})天前")
+        re_d_mn = re.compile(u"(\d{1,2})月前")
+        re_d_xn = re.compile(u"(\d{1,2})小时前")
+        re_d_mmn = re.compile(u"(\d{1,2})分钟前")
 
+        if re_en.search(str(date)):
+            date = re_en.search(str(date)).group(1)
+        elif re_cn.search(str(date)):
+            date = re_cn.search(str(date)).group(1)
+            date = date.replace("年", "-").replace("月", "-").replace("日", "").replace("时", ":").replace("分",":").replace("秒", "")
+        elif re_d_en.search(str(date)):
+            date = re_d_en.search(str(date)).group(1)
+            date = date + " 00:00:00"
+        elif re_d_cn.search(str(date)):
+            date = re_d_cn.search(str(date)).group(1)
+            date = date.replace("年", "-").replace("月", "-").replace("日", "") + " 00:00:00"
+        elif re_m.search(str(date)):
+            date = re_m.search(str(date)).group(1)
+            date = "2018-" + date + " 00:00:00"
+        elif re_d_dn.search(str(date)):
+            date = re_d_dn.search(str(date)).group(1)
+            date = crawldate - datetime.timedelta(days=int(date))
+        elif re_d_mn.search(str(date)):
+            date = re_d_mn.search(str(date)).group(1)
+            date = crawldate - datetime.timedelta(days=int(date) * 30)
+        elif re_d_xn.search(str(date)):
+            date = re_d_xn.search(str(date)).group(1)
+            date = crawldate - datetime.timedelta(hours=int(date))
+        elif re_d_mmn.search(str(date)):
+            date = re_d_mmn.search(str(date)).group(1)
+            date = crawldate - datetime.timedelta(minutes=int(date))
+        elif re_d.search(str(date)):
+            if date == "今天" or "刚刚":
+                date = str(crawldate)
+            elif date == "昨天":
+                date = crawldate - datetime.timedelta(days=1)
+                date = str(date)
+            elif date == "前天":
+                date = crawldate - datetime.timedelta(days=2)
+                date = str(date)
+        return str(date)
 
 
 class Repository_banyuetan(Base):
@@ -271,6 +329,131 @@ class Repository_Douban(Base):
 
 class Repository_Zgdzgblt(Base):
     __tablename__ = 'last9987'
+    id = Column(Integer, primary_key=True)
+    AuthorID = Column(String(255))
+    AuthorName = Column(String(255))
+    ArticleTitle = Column(String(255))
+    SourceArticleURL = Column(String(255))
+    URL = Column(String(255))
+    PublishTime = Column(String(255))
+    Crawler = Column(String(255))
+    ReadCount = Column(String(255))
+    CommentCount = Column(String(255))
+    TransmitCount = Column(String(255))
+    Content = Column(Text())
+    comments = Column(Text())
+    AgreeCount = Column(String(255))
+    DisagreeCount = Column(String(255))
+    AskCount = Column(String(255))
+    ParticipateCount = Column(String(255))
+    CollectionCount = Column(String(255))
+    Classification = Column(String(255))
+    Labels = Column(String(255))
+    Type = Column(String(255))
+    RewardCount = Column(String(255))
+
+class Repository_Zhongguolishi(Base):
+    __tablename__ = 'last9986'
+    id = Column(Integer, primary_key=True)
+    AuthorID = Column(String(255))
+    AuthorName = Column(String(255))
+    ArticleTitle = Column(String(255))
+    SourceArticleURL = Column(String(255))
+    URL = Column(String(255))
+    PublishTime = Column(String(255))
+    Crawler = Column(String(255))
+    ReadCount = Column(String(255))
+    CommentCount = Column(String(255))
+    TransmitCount = Column(String(255))
+    Content = Column(Text())
+    comments = Column(Text())
+    AgreeCount = Column(String(255))
+    DisagreeCount = Column(String(255))
+    AskCount = Column(String(255))
+    ParticipateCount = Column(String(255))
+    CollectionCount = Column(String(255))
+    Classification = Column(String(255))
+    Labels = Column(String(255))
+    Type = Column(String(255))
+    RewardCount = Column(String(255))
+
+class Repository_Zgwhbshi(Base):
+    __tablename__ = 'last9985'
+    id = Column(Integer, primary_key=True)
+    AuthorID = Column(String(255))
+    AuthorName = Column(String(255))
+    ArticleTitle = Column(String(255))
+    SourceArticleURL = Column(String(255))
+    URL = Column(String(255))
+    PublishTime = Column(String(255))
+    Crawler = Column(String(255))
+    ReadCount = Column(String(255))
+    CommentCount = Column(String(255))
+    TransmitCount = Column(String(255))
+    Content = Column(Text())
+    comments = Column(Text())
+    AgreeCount = Column(String(255))
+    DisagreeCount = Column(String(255))
+    AskCount = Column(String(255))
+    ParticipateCount = Column(String(255))
+    CollectionCount = Column(String(255))
+    Classification = Column(String(255))
+    Labels = Column(String(255))
+    Type = Column(String(255))
+    RewardCount = Column(String(255))
+
+class Repository_Zgwmw(Base):
+    __tablename__ = 'last9984'
+    id = Column(Integer, primary_key=True)
+    AuthorID = Column(String(255))
+    AuthorName = Column(String(255))
+    ArticleTitle = Column(String(255))
+    SourceArticleURL = Column(String(255))
+    URL = Column(String(255))
+    PublishTime = Column(String(255))
+    Crawler = Column(String(255))
+    ReadCount = Column(String(255))
+    CommentCount = Column(String(255))
+    TransmitCount = Column(String(255))
+    Content = Column(Text())
+    comments = Column(Text())
+    AgreeCount = Column(String(255))
+    DisagreeCount = Column(String(255))
+    AskCount = Column(String(255))
+    ParticipateCount = Column(String(255))
+    CollectionCount = Column(String(255))
+    Classification = Column(String(255))
+    Labels = Column(String(255))
+    Type = Column(String(255))
+    RewardCount = Column(String(255))
+
+class Repository_Zaker(Base):
+    __tablename__ = 'last9983'
+    id = Column(Integer, primary_key=True)
+    AuthorID = Column(String(255))
+    AuthorName = Column(String(255))
+    ArticleTitle = Column(String(255))
+    SourceArticleURL = Column(String(255))
+    URL = Column(String(255))
+    PublishTime = Column(String(255))
+    Crawler = Column(String(255))
+    ReadCount = Column(String(255))
+    CommentCount = Column(String(255))
+    TransmitCount = Column(String(255))
+    Content = Column(Text())
+    comments = Column(Text())
+    AgreeCount = Column(String(255))
+    DisagreeCount = Column(String(255))
+    AskCount = Column(String(255))
+    ParticipateCount = Column(String(255))
+    CollectionCount = Column(String(255))
+    Classification = Column(String(255))
+    Labels = Column(String(255))
+    Type = Column(String(255))
+    RewardCount = Column(String(255))
+
+class Repository_Qiushi(Base):
+    __tablename__ = 'last9982'
     id = Column(Integer, primary_key=True)
     AuthorID = Column(String(255))
     AuthorName = Column(String(255))

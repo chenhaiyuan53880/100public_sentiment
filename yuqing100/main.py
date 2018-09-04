@@ -1,14 +1,18 @@
 from scrapy import cmdline
-# cmdline.execute("scrapy crawl heimawang_spider".split())
+cmdline.execute("scrapy crawl heimawang_spider".split())
 # cmdline.execute("scrapy crawl banyuetan_spider".split())
-# cmdline.execute("scrapy crawl lianhezaobao_spider".split())
 # cmdline.execute("scrapy crawl nanfrwzk_spider".split())
 # cmdline.execute("scrapy crawl sansijiaoyu_spider".split())
 # cmdline.execute("scrapy crawl Cankaoxiaoxi_Spider".split())
 # cmdline.execute("scrapy crawl Huxiuwang_Spider".split())
 # cmdline.execute("scrapy crawl Danjianyanjiu_spider".split())
 # cmdline.execute("scrapy crawl Douban_spider".split())
-cmdline.execute("scrapy crawl Zgdzgblt_spider".split())
+# cmdline.execute("scrapy crawl Zhongguolishi_spider".split())
+# cmdline.execute("scrapy crawl Zgdzgblt_spider".split())
+# cmdline.execute("scrapy crawl Zgwhb_spider".split())
+# cmdline.execute("scrapy crawl Zgwmw_spider".split())
+# cmdline.execute("scrapy crawl Zaker_Spider".split())
+# cmdline.execute("scrapy crawl Qiushi_spider".split())
 
 
 
@@ -23,4 +27,5 @@ cmdline.execute("scrapy crawl Zgdzgblt_spider".split())
 #     time.sleep(10)
 
 
-
+#网站失效
+# cmdline.execute("scrapy crawl lianhezaobao_spider".split())
