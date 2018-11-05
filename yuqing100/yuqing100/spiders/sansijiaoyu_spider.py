@@ -60,7 +60,7 @@ class SansijiaoyuSpider(scrapy.Spider):
     def parse1(self, response):
         sele = Selector(response)
         title = sele.xpath('//title/text()').extract_first()
-        if title:
+        if title and '页面未找到' not in title:
             # 文章正文内容
             Content = ''
             Contents = sele.xpath(

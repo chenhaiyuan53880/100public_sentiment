@@ -1,70 +1,62 @@
 # -*- coding: utf-8 -*-
 import scrapy
-from scrapy import Request
-import re
 import time
-import requests
-from bs4 import BeautifulSoup
 from scrapy import Selector
 from scrapy_splash import SplashRequest
-from yuqing100.items import Yuqing_ZgdzgbltItem
-from yuqing100.pipelines import Panduan_Zgdzgblt
+from yuqing100.items import Yuqing_GcdywItem
+from yuqing100.pipelines import Panduan_Gcdyw
+from yuqing100.models import datefilter
 
-
-class ZgdzgbltSpider(scrapy.Spider):
-    name = 'Zgdzgblt_spider'
+class GcdywSpider(scrapy.Spider):
+    name = 'Gcdyw_spider'
     start_urls = [
-        'http://www.zgdzgblt.com/'
+        'http://www.12371.cn/zxfb/'
     ]
     headers = {
-        "Host": "www.zgdzgblt.com",
-        "Cookie":"UM_distinctid=165562b7db20-094598c41de32-9393265-1fa400-165562b7db4191; PHPSESSID=3u0dmtk3emenki0lejl5upnra1; CNZZDATA5740866=cnzz_eid%3D1782750184-1534744699-null%26ntime%3D1540254056",
-        "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36",
-        "Referer":"https://www.baidu.com/link?url=NBjAZ9j-FVtlbV2sE3-k3SHv-k2mO8qbUNxNTX_7cFq3okP25tgTUi3naTCURIzq&wd=&eqid=b8cf681e00040f4f000000035bce74dd"
+        "Host": "www.12371.cn"
     }
 
     def start_requests(self):
         for url in self.start_urls:
             yield SplashRequest(url=url,
                                 callback=self.parse,
-                                args={'wait': 20,'timeout':60},
-                                encoding='utf-8',
-                                dont_filter=True)
+                                args={'headers': self.headers, 'wait': 10,'timeout':30},
+                                encoding='utf-8')
 
     def parse(self, response):
         sele = Selector(response)
         links = sele.xpath(
-            '//ul[@class="list"]//a/@href').extract()
+            '//div[@class="zxyw_R"]//a/@href').extract()
         urls = set()
-        panduan = Panduan_Zgdzgblt()
+        panduan = Panduan_Gcdyw()
         db_url = panduan.panduan()
         for link in links:
-            link = 'http://www.zgdzgblt.com' + link
             if link not in db_url:
                 urls.add(link)
         for url in urls:
+            print(url)
             yield SplashRequest(url=url,
                                 callback=self.parse1,
-                                args={'headers': self.headers, 'wait': 20,'timeout':60},
+                                # meta={'url':link},
+                                args={'headers': self.headers, 'wait': 10},
                                 encoding='utf-8')
-
     def parse1(self, response):
         sele = Selector(response)
         title = sele.xpath('//title/text()').extract_first()
-        if title:
+        if title and 'Error' not in title:
             # 文章正文内容
             Content = ''
             Contents = sele.xpath(
-                '//p[contains(@align,"left")]//text()').extract()
+                '//div[@class="font_area_mid"]//text()').extract()
             for body in Contents:
                 Content = Content + str(body)
-            item = Yuqing_ZgdzgbltItem({
+            item = Yuqing_GcdywItem({
                 'AuthorID': '',
                 'AuthorName': '',
                 'ArticleTitle': title,
                 'SourceArticleURL': response.url,
                 'URL': response.url,
-                'PublishTime': sele.xpath('//strong[@id="todayTime"]/text()').extract_first(),
+                'PublishTime': datefilter('2018年' + sele.xpath('//i[@class="time"]/text()').extract_first().split('2018年',1)[1].split('日',1)[0] + '日',time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())),
                 'Crawler': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()),
                 'ReadCount': '',
                 'CommentCount': '',
@@ -77,7 +69,7 @@ class ZgdzgbltSpider(scrapy.Spider):
                 'ParticipateCount': '',
                 'CollectionCount': '',
                 'Classification': '',
-                'Labels': '',
+                'Labels': sele.xpath('//meta[contains(@name,"keywords")]/@content').extract_first(),
                 'Type': '',
                 'RewardCount': ''
             })

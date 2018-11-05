@@ -15,22 +15,9 @@ class CankaoxiaoxiSpider(scrapy.Spider):
     name = 'Cankaoxiaoxi_Spider'
     #还有两个栏目列表也有区别以后跟新
     start_urls = [
-        'http://www.cankaoxiaoxi.com/mil/jsgd/',
-        'http://www.cankaoxiaoxi.com/mil/gjjq/',
-        'http://www.cankaoxiaoxi.com/mil/zgjq/',
-        'http://www.cankaoxiaoxi.com/mil/wqzb/',
-        'http://www.cankaoxiaoxi.com/china/szyw/',
-        'http://www.cankaoxiaoxi.com/china/zgwj/',
-        'http://www.cankaoxiaoxi.com/china/shwx/',
-        'http://www.cankaoxiaoxi.com/china/gacz/',
-        'http://www.cankaoxiaoxi.com/world/qtdq/',
-        'http://www.cankaoxiaoxi.com/world/ytxw/',
-        'http://www.cankaoxiaoxi.com/world/omxw/',
-        'http://www.cankaoxiaoxi.com/world/hqbl/',
-        'http://www.cankaoxiaoxi.com/finance/zgcj/',
-        'http://www.cankaoxiaoxi.com/finance/gjcj/',
-        'http://www.cankaoxiaoxi.com/finance/sygs/',
-        'http://www.cankaoxiaoxi.com/finance/jrsc/'
+        'http://china.cankaoxiaoxi.com/',
+        'http://world.cankaoxiaoxi.com/'
+        # 'http://mil.cankaoxiaoxi.com/'
     ]
     headers = {
         "authority": "http://www.cankaoxiaoxi.com"
@@ -43,12 +30,12 @@ class CankaoxiaoxiSpider(scrapy.Spider):
         for url in self.start_urls:
             yield SplashRequest(url=url,
                                 callback=self.parse,
-                                args={'headers': self.headers, 'wait': 2},
+                                args={'wait': 20, 'timeout': 30},
                                 encoding='utf-8')
 
     def parse(self, response):
         sele = Selector(response)
-        links = sele.xpath('//div[contains(@class, "inner")]/ul//li/a/@href').extract()
+        links = sele.xpath('//div[contains(@class, "elem ov")]/a/@href').extract()
         # if len(links) < 1:
         #     links = sele.xpath('//div[@class="elem ov"]/a/@href').extract()
         urls = set()

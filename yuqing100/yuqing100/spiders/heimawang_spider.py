@@ -36,9 +36,11 @@ class HeimawangSpider(scrapy.Spider):
         panduan = Panduan_heimawang()
         db_url = panduan.panduan()
         for link in links:
+            link = 'http://www.iheima.com' + link
             if link not in db_url:
                 urls.add(link)
         for url in urls:
+            print(url)
             yield SplashRequest(url=url,
                                 callback=self.parse1,
                                 # meta={'url':link},

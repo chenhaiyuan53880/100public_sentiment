@@ -7,17 +7,19 @@ import requests
 from bs4 import BeautifulSoup
 from scrapy import Selector
 from scrapy_splash import SplashRequest
-from yuqing100.items import Yuqing_ZgwhbItem
-from yuqing100.pipelines import Panduan_Zgwhbshi
+from yuqing100.items import Yuqing_ZgshkxwItem
+from yuqing100.pipelines import Panduan_Zgshkxw
 
 
-class ZgwhbSpider(scrapy.Spider):
-    name = 'Zgwhb_spider'
+class ZgshkxwSpider(scrapy.Spider):
+    name = 'Zgshkxw_spider'
     start_urls = [
-        'http://epaper.ccdy.cn'
+        'http://orig.cssn.cn/sf/'
     ]
     headers = {
-        "Referer": "http://epaper.ccdy.cn/"
+        "Referer": "http://www.cssn.cn/",
+        "Host":"orig.cssn.cn",
+        "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36"
     }
 
     def start_requests(self):
@@ -29,18 +31,17 @@ class ZgwhbSpider(scrapy.Spider):
 
     def parse(self, response):
         sele = Selector(response)
-        urls = sele.xpath('//div[@class="paper_div"]//a[contains(@href,"content")]/@href').extract()
-        url1 = 'http://epaper.ccdy.cn/html/' + time.strftime("%Y-%m", time.localtime()) + '/' + time.strftime("%d", time.localtime()) + '/'
-        panduan = Panduan_Zgwhbshi()
+        urls = sele.xpath('.//div[@class="f-main-leftMain-content clear"]//a/@href').extract()
+        panduan = Panduan_Zgshkxw()
         db_url = panduan.panduan()
         for url in urls:
-            url = url1 + url
-            print(url)
-            if url not in db_url:
-                yield SplashRequest(url=url,
-                                    callback=self.parse1,
-                                    args={'headers': self.headers, 'wait': 2},
-                                    encoding='utf-8')
+            if 'http://www.cssn.cn/' in url:
+                if url not in db_url:
+                    print(url)
+                    yield SplashRequest(url=url,
+                                        callback=self.parse1,
+                                        args={'headers': self.headers, 'wait': 10,"timeout":60},
+                                        encoding='utf-8')
 
     def parse1(self, response):
         sele = Selector(response)
@@ -48,16 +49,16 @@ class ZgwhbSpider(scrapy.Spider):
         if title:
             # 文章正文内容
             Content = ''
-            Contents = sele.xpath('//div[@id="ozoom"]//p/text()').extract()
+            Contents = sele.xpath('.//div[@class="TRS_Editor"]//text()').extract()
             for body in Contents:
                 Content = Content + str(body)
-            item = Yuqing_ZgwhbItem({
+            item = Yuqing_ZgshkxwItem({
                 'AuthorID': '',
-                'AuthorName': '',
+                'AuthorName': sele.xpath('//meta[@name="author"]/@content').extract_first(),
                 'ArticleTitle': title,
                 'SourceArticleURL': response.url,
                 'URL': response.url,
-                'PublishTime': time.strftime("%Y-%m-%d", time.localtime()),
+                'PublishTime': sele.xpath('//meta[@name="publishdate"]/@content').extract_first(),
                 'Crawler': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()),
                 'ReadCount': '',
                 'CommentCount': '',

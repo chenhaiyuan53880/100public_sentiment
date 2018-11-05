@@ -15,7 +15,7 @@ function main(splash)
     splash:wait(5)
     splash:runjs("document.getElementsByClassName('list-refresh-msg')[0].scrollIntoView(true)")
     splash:wait(5)
-    return splash:html()    
+    return splash:html()
     end
  '''
 
@@ -27,8 +27,6 @@ function main(splash)
     return splash:html()
     end
  '''
-
-
 
 
 class Jrtt01SpiderSpider(scrapy.Spider):
@@ -93,10 +91,10 @@ class Jrtt01SpiderSpider(scrapy.Spider):
         yield SplashRequest(url, endpoint='execute', args={'lua_source': lua1},
                             cache_args=['lua_source'])
 
-
     def parse(self, response):
         sele = Selector(response)
-        links = sele.xpath('//div[contains(@class,"feedBox")]').xpath('//a[contains(@href, "group")][contains(@class, "title")]/@href').extract()
+        links = sele.xpath('//div[contains(@class,"feedBox")]').xpath(
+            '//a[contains(@href, "group")][contains(@class, "title")]/@href').extract()
         urls = set()
         panduan = Panduan_JRTT()
         db_url = panduan.panduan()
@@ -105,13 +103,16 @@ class Jrtt01SpiderSpider(scrapy.Spider):
             if link_ not in db_url:
                 urls.add(link_)
             else:
-                print(link_,'--重复')
+                print(link_, '--重复')
         for url in urls:
             yield SplashRequest(url=url,
                                 callback=self.parse1,
                                 # meta={'url':link},
-                                args={'lua_source': lua2, 'headers': self.headers, 'wait': 2},
-                                encoding='utf-8',cache_args=['lua_source'],endpoint='execute')
+                                args={
+                                    'lua_source': lua2,
+                                    'headers': self.headers,
+                                    'wait': 2},
+                                encoding='utf-8', cache_args=['lua_source'], endpoint='execute')
 
     def parse1(self, response):
         sele = Selector(response)

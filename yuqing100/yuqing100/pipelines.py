@@ -9,8 +9,8 @@
 import os
 import requests
 from sqlalchemy.orm import sessionmaker
-from yuqing100.models import Repository_Qiushi,Repository_Zaker,Repository_Zgwmw,Repository_Zgwhbshi,Repository_Zhongguolishi,Repository_Zgdzgblt,Repository_Douban,Repository_Danjianyanjiu,Repository_Huxiuwang,Repository_Cankaoxiaoxi,Repository_JRTT,Repository_kepuchina,Repository_banyuetan,Repository_heimawang, Repository_sansijiaoyu, Repository_nanfrwzk, Repository_lianhezaobao, engine
-from yuqing100.items import Yuqing_QiushiItem,Yuqing_ZakerItem,Yuqing_ZgwmwItem,Yuqing_ZgwhbItem,Yuqing_ZhongguolishiItem,Yuqing_ZgdzgbltItem,Yuqing_DoubanItem,Yuqing_DanjianyanjiuItem,Yuqing_HuxiuwangItem,Yuqing_CankaoxiaoxiItem,Yuqing_JRTTItem,Yuqing_banyuetanItem,Yuqing_heimawangItem, Yuqing_sansijiaoyuItem, Yuqing_nanfrwzkItem, Yuqing_lianhezaobaoItem, Kepu_tupian
+from yuqing100.models import Repository_Zywxyjs,Repository_Zggcdlsw,Repository_Yiban,Repository_Zgshkxw,Repository_Meituan,Repository_Guoke,Repository_Gcdyw,Repository_Chuanyeban,Repository_Sihai,Repository_Lieyun,Repository_Af,Repository_Hxdsb,Repository_Dgb,Repository_Zgrb,Repository_Qiushi,Repository_Zaker,Repository_Zgwmw,Repository_Zgwhbshi,Repository_Zhongguolishi,Repository_Zgdzgblt,Repository_Douban,Repository_Danjianyanjiu,Repository_Huxiuwang,Repository_Cankaoxiaoxi,Repository_JRTT,Repository_kepuchina,Repository_banyuetan,Repository_heimawang, Repository_sansijiaoyu, Repository_nanfrwzk, Repository_lianhezaobao, engine
+from yuqing100.items import Yuqing_ZywxyjsItem,Yuqing_ZggcdlswItem,Yuqing_YibanItem,Yuqing_ZgshkxwItem,Yuqing_MeituanItem,Yuqing_GuokeItem,Yuqing_GcdywItem,Yuqing_ChuanyebanItem,Yuqing_SihaiItem,Yuqing_LieyunItem,Yuqing_AfItem,Yuqing_HxdsbItem,Yuqing_DgbItem,Yuqing_ZgrbItem,Yuqing_QiushiItem,Yuqing_ZakerItem,Yuqing_ZgwmwItem,Yuqing_ZgwhbItem,Yuqing_ZhongguolishiItem,Yuqing_ZgdzgbltItem,Yuqing_DoubanItem,Yuqing_DanjianyanjiuItem,Yuqing_HuxiuwangItem,Yuqing_CankaoxiaoxiItem,Yuqing_JRTTItem,Yuqing_banyuetanItem,Yuqing_heimawangItem, Yuqing_sansijiaoyuItem, Yuqing_nanfrwzkItem, Yuqing_lianhezaobaoItem, Kepu_tupian
 from yuqing100.settings import IMAGES_STORE
 
 class Yuqing100Pipeline(object):
@@ -63,6 +63,48 @@ class Yuqing100Pipeline(object):
         elif isinstance(item, Yuqing_QiushiItem):
             self.session.add(Repository_Qiushi(**item))
             return item
+        elif isinstance(item, Yuqing_ZgrbItem):
+            self.session.add(Repository_Zgrb(**item))
+            return item
+        elif isinstance(item, Yuqing_DgbItem):
+            self.session.add(Repository_Dgb(**item))
+            return item
+        elif isinstance(item, Yuqing_HxdsbItem):
+            self.session.add(Repository_Hxdsb(**item))
+            return item
+        elif isinstance(item, Yuqing_AfItem):
+            self.session.add(Repository_Af(**item))
+            return item
+        elif isinstance(item, Yuqing_LieyunItem):
+            self.session.add(Repository_Lieyun(**item))
+            return item
+        elif isinstance(item, Yuqing_SihaiItem):
+            self.session.add(Repository_Sihai(**item))
+            return item
+        elif isinstance(item, Yuqing_ChuanyebanItem):
+            self.session.add(Repository_Chuanyeban(**item))
+            return item
+        elif isinstance(item, Yuqing_GcdywItem):
+            self.session.add(Repository_Gcdyw(**item))
+            return item
+        elif isinstance(item, Yuqing_GuokeItem):
+            self.session.add(Repository_Guoke(**item))
+            return item
+        elif isinstance(item, Yuqing_ZgshkxwItem):
+            self.session.add(Repository_Zgshkxw(**item))
+            return item
+        elif isinstance(item, Yuqing_YibanItem):
+            self.session.add(Repository_Yiban(**item))
+            return item
+        elif isinstance(item, Yuqing_ZggcdlswItem):
+            self.session.add(Repository_Zggcdlsw(**item))
+            return item
+        elif isinstance(item, Yuqing_ZywxyjsItem):
+            self.session.add(Repository_Zywxyjs(**item))
+            return item
+        elif isinstance(item, Yuqing_MeituanItem):
+            self.session.add(Repository_Meituan(**item))
+            return item
         elif isinstance(item, Kepu_tupian):
 
             fold_name = "".join(item['Title'])
@@ -110,7 +152,6 @@ class Yuqing100Pipeline(object):
         self.session.commit()
         self.session.close()
 
-
 class Panduan_banyuetan(object):
     def panduan(self):
         Session = sessionmaker(bind=engine)
@@ -123,7 +164,6 @@ class Panduan_banyuetan(object):
         session.commit()
         session.close()
         return db_urls
-
 
 class Panduan_sansijiaoyu(object):
     def panduan(self):
@@ -138,7 +178,6 @@ class Panduan_sansijiaoyu(object):
         session.close()
         return db_urls
 
-
 class Panduan_nanfrwzk(object):
     def panduan(self):
         Session = sessionmaker(bind=engine)
@@ -151,7 +190,6 @@ class Panduan_nanfrwzk(object):
         session.commit()
         session.close()
         return db_urls
-
 
 class Panduan_lianhezaobao(object):
     def panduan(self):
@@ -314,6 +352,188 @@ class Panduan_Qiushi(object):
         Session = sessionmaker(bind=engine)
         session = Session()
         url_list = session.query(Repository_Qiushi.URL).all()
+        db_urls = []
+        for db_url in url_list:
+            db_url_ = db_url[0]
+            db_urls.append(db_url_)
+        session.commit()
+        session.close()
+        return db_urls
+
+class Panduan_Zgrb(object):
+    def panduan(self):
+        Session = sessionmaker(bind=engine)
+        session = Session()
+        url_list = session.query(Repository_Zgrb.URL).all()
+        db_urls = []
+        for db_url in url_list:
+            db_url_ = db_url[0]
+            db_urls.append(db_url_)
+        session.commit()
+        session.close()
+        return db_urls
+
+class Panduan_Dgb(object):
+    def panduan(self):
+        Session = sessionmaker(bind=engine)
+        session = Session()
+        url_list = session.query(Repository_Dgb.URL).all()
+        db_urls = []
+        for db_url in url_list:
+            db_url_ = db_url[0]
+            db_urls.append(db_url_)
+        session.commit()
+        session.close()
+        return db_urls
+
+class Panduan_Hxdsb(object):
+    def panduan(self):
+        Session = sessionmaker(bind=engine)
+        session = Session()
+        url_list = session.query(Repository_Hxdsb.URL).all()
+        db_urls = []
+        for db_url in url_list:
+            db_url_ = db_url[0]
+            db_urls.append(db_url_)
+        session.commit()
+        session.close()
+        return db_urls
+
+class Panduan_Af(object):
+    def panduan(self):
+        Session = sessionmaker(bind=engine)
+        session = Session()
+        url_list = session.query(Repository_Af.URL).all()
+        db_urls = []
+        for db_url in url_list:
+            db_url_ = db_url[0]
+            db_urls.append(db_url_)
+        session.commit()
+        session.close()
+        return db_urls
+
+class Panduan_Lieyun(object):
+    def panduan(self):
+        Session = sessionmaker(bind=engine)
+        session = Session()
+        url_list = session.query(Repository_Lieyun.URL).all()
+        db_urls = []
+        for db_url in url_list:
+            db_url_ = db_url[0]
+            db_urls.append(db_url_)
+        session.commit()
+        session.close()
+        return db_urls
+
+class Panduan_Sihai(object):
+    def panduan(self):
+        Session = sessionmaker(bind=engine)
+        session = Session()
+        url_list = session.query(Repository_Sihai.URL).all()
+        db_urls = []
+        for db_url in url_list:
+            db_url_ = db_url[0]
+            db_urls.append(db_url_)
+        session.commit()
+        session.close()
+        return db_urls
+
+class Panduan_Chuanyeban(object):
+    def panduan(self):
+        Session = sessionmaker(bind=engine)
+        session = Session()
+        url_list = session.query(Repository_Chuanyeban.URL).all()
+        db_urls = []
+        for db_url in url_list:
+            db_url_ = db_url[0]
+            db_urls.append(db_url_)
+        session.commit()
+        session.close()
+        return db_urls
+
+class Panduan_Gcdyw(object):
+    def panduan(self):
+        Session = sessionmaker(bind=engine)
+        session = Session()
+        url_list = session.query(Repository_Gcdyw.URL).all()
+        db_urls = []
+        for db_url in url_list:
+            db_url_ = db_url[0]
+            db_urls.append(db_url_)
+        session.commit()
+        session.close()
+        return db_urls
+
+class Panduan_Guoke(object):
+    def panduan(self):
+        Session = sessionmaker(bind=engine)
+        session = Session()
+        url_list = session.query(Repository_Guoke.URL).all()
+        db_urls = []
+        for db_url in url_list:
+            db_url_ = db_url[0]
+            db_urls.append(db_url_)
+        session.commit()
+        session.close()
+        return db_urls
+
+class Panduan_Zgshkxw(object):
+    def panduan(self):
+        Session = sessionmaker(bind=engine)
+        session = Session()
+        url_list = session.query(Repository_Zgshkxw.URL).all()
+        db_urls = []
+        for db_url in url_list:
+            db_url_ = db_url[0]
+            db_urls.append(db_url_)
+        session.commit()
+        session.close()
+        return db_urls
+
+class Panduan_Yiban(object):
+    def panduan(self):
+        Session = sessionmaker(bind=engine)
+        session = Session()
+        url_list = session.query(Repository_Yiban.URL).all()
+        db_urls = []
+        for db_url in url_list:
+            db_url_ = db_url[0]
+            db_urls.append(db_url_)
+        session.commit()
+        session.close()
+        return db_urls
+
+class Panduan_Zggcdlsw(object):
+    def panduan(self):
+        Session = sessionmaker(bind=engine)
+        session = Session()
+        url_list = session.query(Repository_Zggcdlsw.URL).all()
+        db_urls = []
+        for db_url in url_list:
+            db_url_ = db_url[0]
+            db_urls.append(db_url_)
+        session.commit()
+        session.close()
+        return db_urls
+
+class Panduan_Zywxyjs(object):
+    def panduan(self):
+        Session = sessionmaker(bind=engine)
+        session = Session()
+        url_list = session.query(Repository_Zywxyjs.URL).all()
+        db_urls = []
+        for db_url in url_list:
+            db_url_ = db_url[0]
+            db_urls.append(db_url_)
+        session.commit()
+        session.close()
+        return db_urls
+
+class Panduan_Meituan(object):
+    def panduan(self):
+        Session = sessionmaker(bind=engine)
+        session = Session()
+        url_list = session.query(Repository_Meituan.URL).all()
         db_urls = []
         for db_url in url_list:
             db_url_ = db_url[0]

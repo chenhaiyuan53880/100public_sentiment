@@ -7,38 +7,45 @@ import requests
 from bs4 import BeautifulSoup
 from scrapy import Selector
 from scrapy_splash import SplashRequest
-from yuqing100.items import Yuqing_ZgwhbItem
-from yuqing100.pipelines import Panduan_Zgwhbshi
+from yuqing100.items import Yuqing_ZgrbItem
+from yuqing100.pipelines import Panduan_Zgrb
 
 
-class ZgwhbSpider(scrapy.Spider):
-    name = 'Zgwhb_spider'
+
+class ZgrbSpider(scrapy.Spider):
+    name = 'Zgrb_Spider'
+    allowed_domains = ['www.chinadaily.com.cn']
     start_urls = [
-        'http://epaper.ccdy.cn'
+        'http://www.chinadaily.com.cn/china/governmentandpolicy'
     ]
     headers = {
-        "Referer": "http://epaper.ccdy.cn/"
+        "Host": "www.chinadaily.com.cn"
     }
 
     def start_requests(self):
         for url in self.start_urls:
-            yield SplashRequest(url=url,
+            yield SplashRequest(url,
                                 callback=self.parse,
-                                args={'headers': self.headers, 'wait': 2},
-                                encoding='utf-8')
+                                args={'headers': self.headers, 'wait': 2})
+
+
 
     def parse(self, response):
         sele = Selector(response)
-        urls = sele.xpath('//div[@class="paper_div"]//a[contains(@href,"content")]/@href').extract()
-        url1 = 'http://epaper.ccdy.cn/html/' + time.strftime("%Y-%m", time.localtime()) + '/' + time.strftime("%d", time.localtime()) + '/'
-        panduan = Panduan_Zgwhbshi()
+        links = sele.xpath('//div[@class="mb10 tw3_01_2"]')
+        panduan = Panduan_Zgrb()
         db_url = panduan.panduan()
-        for url in urls:
-            url = url1 + url
-            print(url)
+        for link in links:
+            url = link.xpath('.//h4/a/@href').extract_first()
+            url = url.replace('//', 'http://')
             if url not in db_url:
+            # try:
+            #     data_time = link.xpath('.//span[@class="tw3_01_2_t"]//b/text()').extract_first()
+            # except:
+            #     data_time = '0'
                 yield SplashRequest(url=url,
                                     callback=self.parse1,
+                                    # meta={'data_time':data_time},
                                     args={'headers': self.headers, 'wait': 2},
                                     encoding='utf-8')
 
@@ -48,16 +55,17 @@ class ZgwhbSpider(scrapy.Spider):
         if title:
             # 文章正文内容
             Content = ''
-            Contents = sele.xpath('//div[@id="ozoom"]//p/text()').extract()
+            Contents = sele.xpath(
+                '//div[@id="Content"]//text()').extract()
             for body in Contents:
                 Content = Content + str(body)
-            item = Yuqing_ZgwhbItem({
+            item = Yuqing_ZgrbItem({
                 'AuthorID': '',
-                'AuthorName': '',
+                'AuthorName': sele.xpath('//meta[@name="author"]/@content').extract_first(),
                 'ArticleTitle': title,
                 'SourceArticleURL': response.url,
                 'URL': response.url,
-                'PublishTime': time.strftime("%Y-%m-%d", time.localtime()),
+                'PublishTime': sele.xpath('//meta[@name="publishdate"]/@content').extract_first(),
                 'Crawler': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()),
                 'ReadCount': '',
                 'CommentCount': '',

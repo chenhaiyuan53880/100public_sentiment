@@ -133,7 +133,6 @@ class Yuqing_lianhezaobaoItem(scrapy.Item):
     Type = scrapy.Field()
     RewardCount = scrapy.Field()
 
-
 class Yuqing_heimawangItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
@@ -309,3 +308,56 @@ class Yuqing_ZakerItem(Yuqing_Item):
 
 class Yuqing_QiushiItem(Yuqing_Item):
     pass
+
+class Yuqing_ZgrbItem(Yuqing_Item):
+    pass
+
+class Yuqing_DgbItem(Yuqing_Item):
+    pass
+
+class Yuqing_HxdsbItem(Yuqing_Item):
+    pass
+
+class Yuqing_AfItem(Yuqing_Item):
+    pass
+
+class Yuqing_LieyunItem(Yuqing_Item):
+    pass
+
+class Yuqing_SihaiItem(Yuqing_Item):
+    pass
+
+class Yuqing_ChuanyebanItem(Yuqing_Item):
+    pass
+
+class Yuqing_GcdywItem(Yuqing_Item):
+    pass
+
+class Yuqing_GuokeItem(Yuqing_Item):
+    pass
+
+class Yuqing_ZgshkxwItem(Yuqing_Item):
+    pass
+
+class Yuqing_YibanItem(Yuqing_Item):
+    pass
+
+class Yuqing_ZggcdlswItem(Yuqing_Item):
+    pass
+
+class Yuqing_ZywxyjsItem(Yuqing_Item):
+    pass
+
+
+
+
+
+
+class Yuqing_MeituanItem(scrapy.Item):
+    # define the fields for your item here like:
+    # name = scrapy.Field()
+    Trade_name = scrapy.Field()
+    Address = scrapy.Field()
+    Phone_number = scrapy.Field()
+    Business_hours = scrapy.Field()
+    URL = scrapy.Field()

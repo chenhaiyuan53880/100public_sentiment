@@ -3,69 +3,46 @@ import scrapy
 from scrapy import Request
 import re
 import time
+import requests
+from bs4 import BeautifulSoup
 from scrapy import Selector
 from scrapy_splash import SplashRequest
-from yuqing100.models import datefilter
-from yuqing100.items import Yuqing_ZakerItem
-from yuqing100.pipelines import Panduan_Zaker
+from yuqing100.items import Yuqing_AfItem
+from yuqing100.pipelines import Panduan_Af
 
-class ZakerSpider(scrapy.Spider):
-    name = 'Zaker_Spider'
-    allowed_domains = ['www.myzaker.com']
+
+class AfSpider(scrapy.Spider):
+    name = 'Af_Spider'
+    allowed_domains = ['www.ifanr.com']
     start_urls = [
-        'http://www.myzaker.com/channel/9',
-        'http://www.myzaker.com/channel/8',
-        'http://www.myzaker.com/channel/7',
-        'http://www.myzaker.com/channel/13',
-        'http://www.myzaker.com/channel/1',
-        'http://www.myzaker.com/channel/2',
-        'http://www.myzaker.com/channel/3',
-        'http://www.myzaker.com/channel/4',
-        'http://www.myzaker.com/channel/5',
-        'http://www.myzaker.com/channel/11',
-        'http://www.myzaker.com/digit/',
-        'http://www.myzaker.com/channel/12',
-        'http://www.myzaker.com/channel/959',
-        'http://www.myzaker.com/channel/1039',
-        'http://www.myzaker.com/channel/1014',
-        'http://www.myzaker.com/channel/1067',
-        'http://www.myzaker.com/channel/10376',
-        'http://www.myzaker.com/channel/10386',
-        'http://www.myzaker.com/channel/10530',
-        'http://www.myzaker.com/channel/10802',
-        'http://www.myzaker.com/channel/11195'
+        'https://www.ifanr.com/app?page=1&pajax=1&post_id__lt=&show_type=list'
     ]
     headers = {
-        "Host": "www.myzaker.com",
-        "Referer":"http://www.myzaker.com/channel/660",
-        "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"
+        "user-agent":"ozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"
     }
 
     def start_requests(self):
         for url in self.start_urls:
             yield SplashRequest(url,
                                 callback=self.parse,
-                                args={'headers': self.headers, 'wait': 2})
+                                args={'headers': self.headers,'wait': 5 , 'timeout':10})
 
 
 
     def parse(self, response):
         sele = Selector(response)
-        links = sele.xpath('//div[@class="figure flex-block"]')
-        panduan = Panduan_Zaker()
+        links = sele.xpath('//h3/a/@href').extract()
+        panduan = Panduan_Af()
         db_url = panduan.panduan()
+        urls = set()
         for link in links:
-            url = link.xpath('.//h2[@class="figcaption"]/a/@href').extract_first()
-            url = url.replace('//','http://')
-            if url not  in db_url:
-                try:
-                    num = link.xpath('.//div[@class="subtitle"]//span/text()').extract()[2]
-                except:
-                    num = '0'
+            urls.add(link)
+        for url in urls:
+            if url not in db_url:
                 yield SplashRequest(url=url,
                                     callback=self.parse1,
-                                    meta={'num':num},
-                                    args={'headers': self.headers, 'wait': 2},
+                                    # meta={'data_time':data_time},
+                                    args={'headers': self.headers, 'wait': 20,'timeout':60},
                                     encoding='utf-8')
 
     def parse1(self, response):
@@ -74,11 +51,11 @@ class ZakerSpider(scrapy.Spider):
         if title:
             # AuthorID
             # 文章作者ID
-            AuthorID = sele.xpath('//div[@class="article_tips"]/a/@href').extract_first().split('source/')[1]
+            AuthorID = ''
 
             # AuthorName
             # 文章作者名称
-            AuthorName = sele.xpath('//span[@class="auther"]/text()').extract_first()
+            AuthorName = sele.xpath('//p[@class="c-card-author__name"]/text()').extract_first()
 
             # ArticleTitle
             # 文章标题
@@ -94,33 +71,28 @@ class ZakerSpider(scrapy.Spider):
 
             # PublishTime
             # 文章发表时间
-            PublishTime = sele.xpath('//span[@class="time"]/text()').extract_first()
+            PublishTime = sele.xpath('//meta[contains(@name, "article:create_at")]/@content').extract_first()
 
-            # if '2018' not in PublishTime:
-            #     PublishTime = sele.xpath(
-            #         '/html/body/div/div[2]/div[2]/div[1]/div[1]/span[3]/text()').extract_first()
             # Crawler
             # 文章爬取时间
             Crawler = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 
-            PublishTime = datefilter(PublishTime,Crawler)
             # ReadCount
             # 文章阅读数量
             ReadCount = ''
 
             # CommentCount
             # 文章回复数量
-            CommentCount = response.meta['num'].replace('评论','')
+            CommentCount = sele.xpath('//p[@class="js-placeholder-comments-counter"]/text()').extract_first()
 
             # TransmitCount
             # 文章转发数量
             TransmitCount = ''
 
-            # Content
             # 文章正文内容
             Content = ''
             Contents = sele.xpath(
-                '//div[@id="content"]//text()').extract()
+                '//article[@class="o-single-content__body__content c-article-content s-single-article js-article"]//text()').extract()
             for body in Contents:
                 Content = Content + str(body)
 
@@ -150,7 +122,7 @@ class ZakerSpider(scrapy.Spider):
 
             # Labels
             # 文章标签
-            Labels = sele.xpath('//meta[@name="keywords"]/text()').extract_first()
+            Labels = sele.xpath('//meta[contains(@name, "keywords")]/@content').extract_first()
 
             # RewardCount
             # 打赏次数
@@ -160,20 +132,18 @@ class ZakerSpider(scrapy.Spider):
             # 评论总字段
 
             comments_list = []
-            comments_seles = sele.xpath('//div[@class="comment_item "]')
-            for comments_sele in comments_seles:
+            lis = sele.xpath('//li[@class="c-article-comments-item"]')
+            for li in lis:
                 comments = {}
                 # commentPublishTime
                 # 评论时间
                 # 时间格式YYYY - MM - DD
                 # HH: mm:ss
-                commentPublishTime = comments_sele.xpath(
-                    './/div[@class="comment_time"]/text()').extract_first()
-                commentPublishTime = datefilter(commentPublishTime, Crawler)
-                comments['commentPublishTime'] = str(commentPublishTime)
+                commentPublishTime = li.xpath('.//div[@class="c-article-comments-item__meta"]/text()').extract_first()
+                comments['commentPublishTime'] = commentPublishTime
 
                 # commentReplyTargetType
-                # 评论对象的类型x`
+                # 评论对象的类型
                 # 正文
                 # 或者
                 # 回复
@@ -187,36 +157,36 @@ class ZakerSpider(scrapy.Spider):
 
                 # commentAuthorID
                 # 评论者ID
-                commentAuthorID = ''
+                commentAuthorID = URL.replace('https://www.ifanr.com/','')
                 comments['commentAuthorID'] = commentAuthorID
 
                 # commentAuthorName
                 # 评论者名称
-                commentAuthorName = comments_sele.xpath(
-                    './/div[@class="comment_title author"]/text()').extract_first()
+                commentAuthorName = li.xpath('.//span[@class="c-article-comments-item__name"]/text()').extract_first()
                 comments['commentAuthorName'] = commentAuthorName
 
                 # commentContent
                 # 评论内容
-                commentContent = comments_sele.xpath(
-                    './/div[@class="comment_desc con"]/text()').extract_first()
+                commentContents = li.xpath('.//div[@class="c-article-comments-item__content"]//text()').extract()
+                commentContent = ''
+                for body in commentContents:
+                    commentContent = commentContent + str(body)
                 comments['commentContent'] = commentContent
 
                 # commentAgreeCount
                 # 赞同数
-                commentAgreeCount = comments_sele.xpath(
-                    './/div[@class="comment_zan like_num"]/text()').extract_first()
+                commentAgreeCount = li.xpath('.//button[@class="c-article-comments-item-voting c-article-comments-item-voting--up js-vote-up "]/text()').extract_first()
                 comments['commentAgreeCount'] = str(
                     commentAgreeCount).replace('\xa0', '')
 
                 # commentDisagreeCount
                 # 反对数
-                commentDisagreeCount = ''
-                comments['commentDisagreeCount'] = commentDisagreeCount
+                commentDisagreeCount = li.xpath('.//button[@class="c-article-comments-item-voting c-article-comments-item-voting--down js-vote-down "]/text()').extract_first()
+                comments['commentDisagreeCount'] = str(
+                    commentDisagreeCount).replace('\xa0', '')
 
                 comments_list.append(comments)
-
-            item = Yuqing_ZakerItem({
+            item = Yuqing_AfItem({
                 'AuthorID': AuthorID,
                 'AuthorName': AuthorName,
                 'ArticleTitle': title,
@@ -239,4 +209,6 @@ class ZakerSpider(scrapy.Spider):
                 'Type': '',
                 'RewardCount': ''
             })
+
             yield item
+            # print(item)

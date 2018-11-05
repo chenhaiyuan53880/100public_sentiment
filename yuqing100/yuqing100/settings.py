@@ -18,7 +18,9 @@ ROBOTSTXT_OBEY = False
 FEED_EXPORT_ENCODING = 'utf-8'
 IMAGES_STORE = 'D://pic_kepu'
 
-DOWNLOAD_DELAY = 1
+# HTTPERROR_ALLOWED_CODES = [400]
+
+DOWNLOAD_DELAY = 5
 DOWNLOAD_TIMEOUT = 100
 CONCURRENT_REQUESTS = 6
 
@@ -32,7 +34,7 @@ CONCURRENT_REQUESTS = 6
 #     'use_unicode': False,
 # }
 
-SPLASH_URL = 'http://192.168.10.183:8050'
+SPLASH_URL = 'http://192.168.10.84:8050/'
 
 DOWNLOADER_MIDDLEWARES = {
     # 'Job.middlewares.phantomjsMiddleware.phantomjsMiddleware': 543,
